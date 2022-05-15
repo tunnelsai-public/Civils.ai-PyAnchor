@@ -5,6 +5,8 @@
 import numpy as np
 
 #  ---Input section---
+# testing update
+
 
 E_d = int(input('Design force in N: '))
 phi = int(input('Diameter of the anchor in mm: '))
