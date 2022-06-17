@@ -2,45 +2,49 @@ import numpy as np
 
 
 class Anchor:
-    def __init__(self, anchor_diameter= 20,  length= 3, steel_strength=275, ):
+    # A default anchor will be created which is 20mm diameter, in a 22mm hole, 3m in length with a steel strength of 275N/mm2
+    # Andrea, to update these parameters, see my example at the bottom of the code.
+    def __init__(self, anchor_diameter= 20, hole_diameter=22, length= 3, steel_strength=275, ):
         self.anchor_diameter = anchor_diameter
         self.length = length
         self.steel_strength = steel_strength 
-        self.hole_diameter = 0
-        self.soil_type = 0
-        self.grout_stength = 0
-        self.pressure = 0
-        self.grout_method = 0
+        self.hole_diameter = hole_diameter
+        self.soil_type = 8
+        self.grout_stength = 55
+        self.pressure = 55
+
+        self.grout_method = 1
         self.design_load = 0
 
-    #In which kind of soil is the foundation? 
-    # 0 - Gravel 
-    # 1 - Sandy gravel 
-    # 2 -  Gravely sand 
-    # 3 - Coarse sand 
-    # 4 -  Medium sand 
-    # 5 - Fine sand
-    # 6 -  Silty sand
-    # 7 -  Silt
-    # 8 -  Clay
-    # 9 -  Marl
-    # 10 - Marly limestone
-    # 11 - Altered or fractured limestone
-    # 12 - Altered or fractured rock
 
-    def add_drilled_hole(self, hole_diameter, soil_type,):
-        self.hole_diameter = hole_diameter
+    def update_soil(self, soil_type,):
+        #In which kind of soil is the foundation? 
+        # 0 - Gravel 
+        # 1 - Sandy gravel 
+        # 2 -  Gravely sand 
+        # 3 - Coarse sand 
+        # 4 -  Medium sand 
+        # 5 - Fine sand
+        # 6 -  Silty sand
+        # 7 -  Silt
+        # 8 -  Clay
+        # 9 -  Marl
+        # 10 - Marly limestone
+        # 11 - Altered or fractured limestone
+        # 12 - Altered or fractured rock
         self.soil_type = soil_type
 
-    # 0 - Multiple high pressure injection
-    # 1 - Single low pressure injection 
 
-    def add_grout(self, grout_stength=55, pressure=55, grout_method=1):
+    def update_grout(self, grout_stength, pressure, grout_method):
+        # For grout method:
+        # 0 - Multiple high pressure injection
+        # 1 - Single low pressure injection 
         self.grout_stength = grout_stength
         self.pressure = pressure
         self.grout_method = grout_method
 
-    def apply_load(self, design_load=10):
+
+    def update_load(self, design_load):
         self.design_load = design_load
 
     def calculate_worst_resistance(self):
@@ -105,13 +109,14 @@ class Anchor:
         # Slip resistance at the interface steel-grout
         slip_resistance_steel_grout = np.pi * self.anchor_diameter * t_d * self.length / 1000
         print('Steel-grout resistance: ' + str(format(float(slip_resistance_steel_grout), '.2f')) + ' kN')
+        return min(slip_resistance_soil_grout, tension_resistance, slip_resistance_steel_grout) 
 
 
 
-
-#Here is where you can call the classes
-test = Anchor()
-test.add_drilled_hole(22, 8)
-test.add_grout()
-test.apply_load(100)
-test.calculate_worst_resistance()
+# Andrea, here creating a new object called 'test' and setting the call of this object as an anchor.
+# I'm updating the diameter as 30mm and the hole size as 32mm and the length of 4m.
+test = Anchor(anchor_diameter= 30, hole_diameter=32, length= 4,)
+test.update_soil(8)
+test.update_load(100)
+result = test.calculate_worst_resistance()
+print(result)
