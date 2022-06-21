@@ -39,7 +39,7 @@ class Anchor:
 
         self.update_grout(
             grout_strength=55,
-            grout_pressure=55,
+            pressure=55,
             grout_method=1,
         )
 
@@ -222,6 +222,7 @@ test = Anchor(
     length=4,
 )
 test.update_soil(8)
+test.calculate_alpha_d()
 test.update_load(100)
 result = test.calculate_worst_resistance()
 print(result)
