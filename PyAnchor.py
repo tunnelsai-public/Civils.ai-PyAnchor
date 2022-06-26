@@ -45,10 +45,7 @@ class Anchor:
 
         self.update_soil(soil_type=8)
 
-        # anchor design load not currently used anywhere by the class?
-        # is there going to be a function in future that utilises it,
-        # or do we only want to concern ourselves with determining capacities.
-        self.update_load(design_load=0)
+        self.calculate_alpha_d()
 
     def update_soil(
         self,
@@ -101,16 +98,6 @@ class Anchor:
 
         if grout_method:
             self.grout_method = grout_method
-
-    def update_load(self, design_load=0):
-        """Method to update anchor design load.
-
-        Parameters
-        ----------
-        design_load : float, optional
-            anchor design load in kN, by default 0.
-        """
-        self.design_load = design_load
 
     def calculate_alpha_d(self):
         """Method to calculate alpha_d using table from Bustamante & Doix"""
@@ -209,9 +196,9 @@ class Anchor:
             + str(format(float(slip_resistance_steel_grout), ".2f"))
             + " kN"
         )
-        return min(
+        return round(min(
             slip_resistance_soil_grout, tension_resistance, slip_resistance_steel_grout
-        )
+        )[0],2)
 
 
 # Andrea, here creating a new object called 'test' and setting the call of this object as an anchor.
@@ -222,7 +209,5 @@ test = Anchor(
     length=4,
 )
 test.update_soil(8)
-test.calculate_alpha_d()
-test.update_load(100)
 result = test.calculate_worst_resistance()
 print(result)
