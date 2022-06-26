@@ -1,0 +1,8 @@
+LICENSE
+README.md
+setup.py
+pyanchorgeo.egg-info/PKG-INFO
+pyanchorgeo.egg-info/SOURCES.txt
+pyanchorgeo.egg-info/dependency_links.txt
+pyanchorgeo.egg-info/requires.txt
+pyanchorgeo.egg-info/top_level.txt
