@@ -5,7 +5,7 @@ A python package for soil anchor design using the Bustamante &amp; Doix (1985) e
 - Calculate the strength of the steel-grout interface resistance.
 - Calculate the strength of the steel anchor.
 
-This module will calculate and return the minimum resistance of the three parameters considered.
+This module will calculate and return the minimum resistance of the three parameters considered
 
 ## Project Purpose
 The purpose of this project is to create a free module for calculating ground anchor resistance for integration with retaining wall and ground improvement design software.
