@@ -92,3 +92,6 @@ If you install the package via `pip`, the listed dependencies should be installe
 ## License
 
 https://github.com/tunnelsai-public/PyAnchor/blob/main/LICENSE
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
